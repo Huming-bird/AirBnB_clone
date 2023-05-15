@@ -226,7 +226,6 @@ of all instances based or not on the class name')
         print('Updates an instance based on the class name and id \
 by adding or updating attribute')
 
-
     def precmd(self, arg):
         """ This method overwrites the cmd base class method precmd """
 
@@ -235,7 +234,11 @@ by adding or updating attribute')
             if '(' not in arglist[1]:
                 arglist2 = [arglist[1], arglist[0]]
             else:
-                if 'show' in arg:
+                if 'all' in arg or 'count' in arg:
+                    arglist[1] = arglist[1].replace(')', "")
+                    arglist[1] = arglist[1].replace('(', "")
+                    arglist2 = [arglist[1], arglist[0]]
+                if 'show' in arg or 'destroy' in arg:
                     arglist[1] = arglist[1].replace(')', "")
                     arglist[1] = arglist[1].split('(')
                     arglist2 = list((arglist[1][0], arglist[0], arglist[1][1]))
